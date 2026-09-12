@@ -1,8 +1,16 @@
-// ==========================================
-// NEW ISRAEL HIGHSCHOOL - STUDENT SAFEREPORT
+
+
+        // ==========================================
+// NEW ISRAEL HIGHSCHOOL
+// STUDENT SAFEREPORT
+// FINAL SCRIPT.JS
 // ==========================================
 
-// Sections
+
+// ==========================================
+// SECTIONS
+// ==========================================
+
 const reportSection = document.getElementById("reportSection");
 const trackSection = document.getElementById("trackSection");
 const helpSection = document.getElementById("helpSection");
@@ -19,29 +27,44 @@ const sections = [
 
 
 // ==========================================
-// NAVIGATION
+// HIDE ALL SECTIONS
 // ==========================================
 
 function hideSections() {
+
   sections.forEach(section => {
+
     if (section) {
       section.classList.add("hidden");
     }
+
   });
+
 }
 
 
+// ==========================================
+// HOME
+// ==========================================
+
 function goHome() {
+
   hideSections();
 
   window.scrollTo({
     top: 0,
     behavior: "smooth"
   });
+
 }
 
 
+// ==========================================
+// SHOW REPORT
+// ==========================================
+
 function showReport() {
+
   hideSections();
 
   if (reportSection) {
@@ -52,10 +75,16 @@ function showReport() {
     top: 0,
     behavior: "smooth"
   });
+
 }
 
 
+// ==========================================
+// SHOW TRACK
+// ==========================================
+
 function showTrack() {
+
   hideSections();
 
   if (trackSection) {
@@ -66,10 +95,16 @@ function showTrack() {
     top: 0,
     behavior: "smooth"
   });
+
 }
 
 
+// ==========================================
+// SHOW HELP
+// ==========================================
+
 function showHelp() {
+
   hideSections();
 
   if (helpSection) {
@@ -80,10 +115,16 @@ function showHelp() {
     top: 0,
     behavior: "smooth"
   });
+
 }
 
 
+// ==========================================
+// SHOW PRIVACY
+// ==========================================
+
 function showPrivacy() {
+
   hideSections();
 
   if (privacySection) {
@@ -94,6 +135,7 @@ function showPrivacy() {
     top: 0,
     behavior: "smooth"
   });
+
 }
 
 
@@ -114,9 +156,11 @@ function selectCategory(category) {
   const form =
     document.getElementById("reportForm");
 
+
   if (categoryText) {
     categoryText.textContent = category;
   }
+
 
   if (form) {
 
@@ -128,6 +172,7 @@ function selectCategory(category) {
     });
 
   }
+
 }
 
 
@@ -148,7 +193,10 @@ if (anonymousSelect) {
       const nameBox =
         document.getElementById("nameBox");
 
-      if (!nameBox) return;
+      if (!nameBox) {
+        return;
+      }
+
 
       if (this.value.includes("No")) {
 
@@ -158,8 +206,20 @@ if (anonymousSelect) {
 
         nameBox.classList.add("hidden");
 
-        document.getElementById("studentName").value = "";
-        document.getElementById("gradeSection").value = "";
+        const studentName =
+          document.getElementById("studentName");
+
+        const gradeSection =
+          document.getElementById("gradeSection");
+
+
+        if (studentName) {
+          studentName.value = "";
+        }
+
+        if (gradeSection) {
+          gradeSection.value = "";
+        }
 
       }
 
@@ -175,10 +235,14 @@ if (anonymousSelect) {
 
 function generateReportID() {
 
-  const year = new Date().getFullYear();
+  const year =
+    new Date().getFullYear();
 
   const randomNumber =
-    Math.floor(100000 + Math.random() * 900000);
+    Math.floor(
+      100000 +
+      Math.random() * 900000
+    );
 
   return `SR-${year}-${randomNumber}`;
 
@@ -191,32 +255,74 @@ function generateReportID() {
 
 async function submitReport() {
 
+
+  // ========================================
+  // GET FORM VALUES
+  // ========================================
+
+  const descriptionElement =
+    document.getElementById("description");
+
+  const locationElement =
+    document.getElementById("location");
+
+  const incidentDateElement =
+    document.getElementById("incidentDate");
+
+  const repeatedElement =
+    document.getElementById("repeated");
+
+  const urgencyElement =
+    document.getElementById("urgency");
+
+  const anonymousElement =
+    document.getElementById("anonymous");
+
+  const studentNameElement =
+    document.getElementById("studentName");
+
+  const gradeSectionElement =
+    document.getElementById("gradeSection");
+
+
   const description =
-    document.getElementById("description").value.trim();
+    descriptionElement
+      ? descriptionElement.value.trim()
+      : "";
 
   const location =
-    document.getElementById("location").value;
+    locationElement
+      ? locationElement.value
+      : "";
 
   const incidentDate =
-    document.getElementById("incidentDate").value;
+    incidentDateElement
+      ? incidentDateElement.value
+      : "";
 
   const repeated =
-    document.getElementById("repeated").value;
+    repeatedElement
+      ? repeatedElement.value
+      : "";
 
   const urgency =
-    document.getElementById("urgency").value;
+    urgencyElement
+      ? urgencyElement.value
+      : "";
 
   const anonymous =
-    document.getElementById("anonymous").value;
+    anonymousElement
+      ? anonymousElement.value
+      : "Yes - Anonymous";
 
   const studentName =
-    document.getElementById("studentName")
-      ? document.getElementById("studentName").value.trim()
+    studentNameElement
+      ? studentNameElement.value.trim()
       : "";
 
   const gradeSection =
-    document.getElementById("gradeSection")
-      ? document.getElementById("gradeSection").value.trim()
+    gradeSectionElement
+      ? gradeSectionElement.value.trim()
       : "";
 
 
@@ -226,7 +332,9 @@ async function submitReport() {
 
   if (!selectedCategory) {
 
-    alert("Please select a concern category.");
+    alert(
+      "Please select a concern category."
+    );
 
     return;
   }
@@ -234,7 +342,9 @@ async function submitReport() {
 
   if (!description) {
 
-    alert("Please describe what happened.");
+    alert(
+      "Please describe what happened."
+    );
 
     return;
   }
@@ -242,7 +352,19 @@ async function submitReport() {
 
   if (description.length < 10) {
 
-    alert("Please provide a little more detail about what happened.");
+    alert(
+      "Please provide at least 10 characters describing what happened."
+    );
+
+    return;
+  }
+
+
+  if (description.length > 5000) {
+
+    alert(
+      "Your description is too long. Please keep it under 5000 characters."
+    );
 
     return;
   }
@@ -250,7 +372,9 @@ async function submitReport() {
 
   if (!location) {
 
-    alert("Please select where it happened.");
+    alert(
+      "Please select where it happened."
+    );
 
     return;
   }
@@ -258,7 +382,9 @@ async function submitReport() {
 
   if (!incidentDate) {
 
-    alert("Please select the date.");
+    alert(
+      "Please select the date."
+    );
 
     return;
   }
@@ -276,14 +402,16 @@ async function submitReport() {
 
   if (!urgency) {
 
-    alert("Please select the urgency.");
+    alert(
+      "Please select the urgency."
+    );
 
     return;
   }
 
 
   // ========================================
-  // ANONYMOUS DATA
+  // ANONYMOUS
   // ========================================
 
   const isAnonymous =
@@ -291,15 +419,19 @@ async function submitReport() {
 
 
   const finalStudentName =
-    isAnonymous ? null : studentName;
+    isAnonymous
+      ? null
+      : studentName;
 
 
   const finalGradeSection =
-    isAnonymous ? null : gradeSection;
+    isAnonymous
+      ? null
+      : gradeSection;
 
 
   // ========================================
-  // REPORT ID
+  // GENERATE REPORT CODE
   // ========================================
 
   const reportID =
@@ -307,17 +439,17 @@ async function submitReport() {
 
 
   // ========================================
-  // BUTTON
+  // SUBMIT BUTTON
   // ========================================
 
   const submitButton =
     document.querySelector(".submit-btn");
 
 
-  const originalButtonText =
+  const originalText =
     submitButton
       ? submitButton.textContent
-      : "";
+      : "🔒 Submit Confidential Report";
 
 
   if (submitButton) {
@@ -330,76 +462,107 @@ async function submitReport() {
   }
 
 
+  // ========================================
+  // CHECK SUPABASE
+  // ========================================
+
+  if (
+    typeof supabaseClient === "undefined"
+  ) {
+
+    alert(
+      "Supabase is not connected. Please check your index.html."
+    );
+
+    if (submitButton) {
+
+      submitButton.disabled = false;
+
+      submitButton.textContent =
+        originalText;
+
+    }
+
+    return;
+  }
+
+
+  // ========================================
+  // SAVE TO SUPABASE
+  // ========================================
+
   try {
 
-    // ======================================
-    // SUPABASE INSERT
-    // ======================================
-
-    const { data, error } =
+    const { error } =
       await supabaseClient
         .from("reports")
         .insert([
-
           {
-            report_code: reportID,
 
-            category: selectedCategory,
+            report_code:
+              reportID,
 
-            description: description,
+            category:
+              selectedCategory,
 
-            location: location,
+            description:
+              description,
 
-            incident_date: incidentDate,
+            location:
+              location,
 
-            repeated: repeated,
+            incident_date:
+              incidentDate,
 
-            urgency: urgency,
+            repeated:
+              repeated,
 
-            anonymous: isAnonymous,
+            urgency:
+              urgency,
 
-            student_name: finalStudentName,
+            anonymous:
+              isAnonymous,
 
-            grade_section: finalGradeSection,
+            student_name:
+              finalStudentName,
 
-            status: "Received"
+            grade_section:
+              finalGradeSection,
+
+            status:
+              "Received"
 
           }
-
-        ])
-        .select()
-        .single();
+        ]);
 
 
     // ======================================
-    // ERROR
+    // SUPABASE ERROR
     // ======================================
 
     if (error) {
 
       console.error(
-        "Supabase error:",
+        "Supabase Error:",
         error
       );
 
+
       alert(
         "Hindi naisumite ang report.\n\n" +
-        "Maaaring hindi pa naka-configure ang database security policy."
+        "Error: " +
+        error.message
       );
 
+
       return;
+
     }
 
 
     // ======================================
     // SUCCESS
     // ======================================
-
-    console.log(
-      "Report successfully saved:",
-      data
-    );
-
 
     const generatedID =
       document.getElementById("generatedID");
@@ -413,17 +576,17 @@ async function submitReport() {
     }
 
 
-    // Clear form
     clearReportForm();
 
 
-    // Show success
     hideSections();
 
 
     if (successSection) {
 
-      successSection.classList.remove("hidden");
+      successSection.classList.remove(
+        "hidden"
+      );
 
     }
 
@@ -437,6 +600,12 @@ async function submitReport() {
     });
 
 
+    console.log(
+      "Report successfully submitted:",
+      reportID
+    );
+
+
   } catch (error) {
 
     console.error(
@@ -444,9 +613,10 @@ async function submitReport() {
       error
     );
 
+
     alert(
-      "May error habang ipinapadala ang report. " +
-      "Pakisubukan muli."
+      "May unexpected error habang ipinapadala ang report.\n\n" +
+      error.message
     );
 
 
@@ -457,8 +627,7 @@ async function submitReport() {
       submitButton.disabled = false;
 
       submitButton.textContent =
-        originalButtonText ||
-        "🔒 Submit Confidential Report";
+        originalText;
 
     }
 
@@ -468,12 +637,13 @@ async function submitReport() {
 
 
 // ==========================================
-// CLEAR REPORT FORM
+// CLEAR FORM
 // ==========================================
 
 function clearReportForm() {
 
   selectedCategory = "";
+
 
   const description =
     document.getElementById("description");
@@ -513,41 +683,52 @@ function clearReportForm() {
     description.value = "";
   }
 
+
   if (location) {
     location.value = "";
   }
+
 
   if (incidentDate) {
     incidentDate.value = "";
   }
 
+
   if (repeated) {
     repeated.value = "";
   }
+
 
   if (urgency) {
     urgency.value = "";
   }
 
+
   if (anonymous) {
-    anonymous.value = "Yes - Anonymous";
+    anonymous.value =
+      "Yes - Anonymous";
   }
+
 
   if (studentName) {
     studentName.value = "";
   }
 
+
   if (gradeSection) {
     gradeSection.value = "";
   }
+
 
   if (categoryText) {
     categoryText.textContent = "";
   }
 
+
   if (nameBox) {
     nameBox.classList.add("hidden");
   }
+
 
   if (reportForm) {
     reportForm.classList.add("hidden");
@@ -566,7 +747,9 @@ async function trackReport() {
     document.getElementById("reportID");
 
   const result =
-    document.getElementById("trackingResult");
+    document.getElementById(
+      "trackingResult"
+    );
 
 
   if (!input || !result) {
@@ -590,9 +773,19 @@ async function trackReport() {
   }
 
 
-  // ========================================
-  // SEARCH SUPABASE
-  // ========================================
+  if (
+    typeof supabaseClient === "undefined"
+  ) {
+
+    result.innerHTML = `
+      <div class="privacy-warning">
+        ⚠️ Supabase is not connected.
+      </div>
+    `;
+
+    return;
+  }
+
 
   result.innerHTML = `
     <div class="info-box">
@@ -609,20 +802,26 @@ async function trackReport() {
         .select(
           "report_code,status,created_at"
         )
-        .eq("report_code", id)
+        .eq(
+          "report_code",
+          id
+        )
         .maybeSingle();
 
 
     if (error) {
 
       console.error(
-        "Tracking error:",
+        "Tracking Error:",
         error
       );
 
+
       result.innerHTML = `
         <div class="privacy-warning">
-          ⚠️ Unable to check the report right now.
+          ⚠️ Hindi pa available ang report tracking.
+          <br><br>
+          Please try again later.
         </div>
       `;
 
@@ -636,7 +835,7 @@ async function trackReport() {
         <div class="privacy-warning">
           ❌ Report ID not found.
           <br><br>
-          Please check your Report ID and try again.
+          Please check your Report ID.
         </div>
       `;
 
@@ -644,27 +843,42 @@ async function trackReport() {
     }
 
 
-    // ======================================
-    // STATUS
-    // ======================================
-
-    let statusIcon = "🟡";
+    let statusIcon =
+      "🟡";
 
 
     if (data.status === "Received") {
-      statusIcon = "🟡";
+
+      statusIcon =
+        "🟡";
+
     }
 
-    else if (data.status === "Under Review") {
-      statusIcon = "🔵";
+    else if (
+      data.status === "Under Review"
+    ) {
+
+      statusIcon =
+        "🔵";
+
     }
 
-    else if (data.status === "Resolved") {
-      statusIcon = "🟢";
+    else if (
+      data.status === "Resolved"
+    ) {
+
+      statusIcon =
+        "🟢";
+
     }
 
-    else if (data.status === "Closed") {
-      statusIcon = "⚪";
+    else if (
+      data.status === "Closed"
+    ) {
+
+      statusIcon =
+        "⚪";
+
     }
 
 
@@ -687,8 +901,9 @@ async function trackReport() {
         </p>
 
         <p>
-          Your report has been received by the
-          Student SafeReport system.
+          Your report has been received
+          and is awaiting review by
+          authorized school personnel.
         </p>
 
       </div>
@@ -698,9 +913,10 @@ async function trackReport() {
   } catch (error) {
 
     console.error(
-      "Unexpected tracking error:",
+      "Tracking Error:",
       error
     );
+
 
     result.innerHTML = `
       <div class="privacy-warning">
@@ -715,27 +931,53 @@ async function trackReport() {
 
 
 // ==========================================
-// SECURITY HELPER
+// ESCAPE HTML
 // ==========================================
 
 function escapeHTML(value) {
 
-  if (value === null || value === undefined) {
+  if (
+    value === null ||
+    value === undefined
+  ) {
+
     return "";
+
   }
 
+
   return String(value)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
 
 }
 
 
 // ==========================================
-// INITIALIZE
+// START
 // ==========================================
 
 document.addEventListener(
@@ -745,7 +987,7 @@ document.addEventListener(
     hideSections();
 
     console.log(
-      "New Israel Highschool SafeReport loaded."
+      "New Israel Highschool Student SafeReport is ready."
     );
 
   }
