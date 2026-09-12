@@ -1,1 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Admin | New Israel SafeReport</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ADMIN HEADER -->
+  <header class="header">
+
+    <img
+      src="school-logo.jpg"
+      alt="New Israel Highschool Logo"
+      class="school-logo"
+    >
+
+    <div>
+      <h1>New Israel Highschool</h1>
+      <p>SafeReport — Admin Dashboard</p>
+    </div>
+
+  </header>
+
+
+  <!-- LOGIN -->
+  <main id="adminLogin" class="content-section">
+
+    <div class="content-card">
+
+      <div style="text-align:center; font-size:60px;">
+        🔐
+      </div>
+
+      <h2 style="text-align:center;">
+        Admin Login
+      </h2>
+
+      <p style="text-align:center;">
+        Authorized school personnel only.
+      </p>
+
+      <label>
+        Admin Username
+      </label>
+
+      <input
+        type="text"
+        id="adminUsername"
+        placeholder="Enter username"
+      >
+
+      <label>
+        Admin Password
+      </label>
+
+      <input
+        type="password"
+        id="adminPassword"
+        placeholder="Enter password"
+      >
+
+      <button
+        style="width:100%; margin-top:25px;"
+        onclick="adminLogin()"
+      >
+        🔐 Login
+      </button>
+
+      <p
+        id="loginMessage"
+        style="text-align:center;"
+      ></p>
+
+      <div class="privacy-warning">
+        ⚠️ <b>Important:</b>
+        This is currently a demonstration login.
+        We will replace it with a proper secure authentication
+        system before using real student reports.
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- DASHBOARD -->
+  <main
+    id="adminDashboard"
+    class="content-section hidden"
+  >
+
+    <div class="content-card">
+
+      <button
+        class="back-btn"
+        onclick="adminLogout()"
+      >
+        🚪 Logout
+      </button>
+
+      <h2>📊 Admin Dashboard</h2>
+
+      <p>
+        Welcome, Authorized School Personnel.
+      </p>
+
+
+      <!-- STATISTICS -->
+
+      <div class="quick-actions">
+
+        <div class="action-card">
+          <span>📋</span>
+          <h3 id="totalReports">0</h3>
+          <p>Total Reports</p>
+        </div>
+
+        <div class="action-card">
+          <span>🟡</span>
+          <h3 id="pendingReports">0</h3>
+          <p>Under Review</p>
+        </div>
+
+        <div class="action-card">
+          <span>🔴</span>
+          <h3 id="urgentReports">0</h3>
+          <p>Urgent</p>
+        </div>
+
+        <div class="action-card">
+          <span>🟢</span>
+          <h3 id="resolvedReports">0</h3>
+          <p>Resolved</p>
+        </div>
+
+      </div>
+
+
+      <!-- REPORT LIST -->
+
+      <h2>📋 Student Reports</h2>
+
+      <div id="reportList">
+
+        <div class="info-box">
+
+          <h3>No reports yet</h3>
+
+          <p>
+            Submitted reports will appear here
+            once the secure database is connected.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- NOTICE -->
+
+      <div class="privacy-warning">
+
+        🔒 <b>Confidentiality Notice</b>
+
+        <p>
+          Student reports contain potentially sensitive
+          information. Access should be limited to
+          authorized school personnel only.
+        </p>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <footer>
+
+    <p>
+      🏫 <b>New Israel Highschool</b>
+    </p>
+
+    <p>
+      Student SafeReport — Admin Area
+    </p>
+
+    <small>
+      🔒 Authorized Access Only
+    </small>
+
+  </footer>
+
+
+  <script>
+
+    function adminLogin() {
+
+      const username =
+        document.getElementById("adminUsername").value.trim();
+
+      const password =
+        document.getElementById("adminPassword").value;
+
+      const message =
+        document.getElementById("loginMessage");
+
+
+      /*
+       DEMO LOGIN ONLY
+
+       We will NOT use this for the final
+       real school system.
+      */
+
+      if (
+        username === "admin" &&
+        password === "1234"
+      ) {
+
+        document
+          .getElementById("adminLogin")
+          .classList.add("hidden");
+
+        document
+          .getElementById("adminDashboard")
+          .classList.remove("hidden");
+
+        loadDemoReports();
+
+      } else {
+
+        message.textContent =
+          "❌ Incorrect username or password.";
+
+        message.style.color = "#ffb3b3";
+
+      }
+
+    }
+
+
+    function adminLogout() {
+
+      document
+        .getElementById("adminDashboard")
+        .classList.add("hidden");
+
+      document
+        .getElementById("adminLogin")
+        .classList.remove("hidden");
+
+      document
+        .getElementById("adminPassword")
+        .value = "";
+
+    }
+
+
+    function loadDemoReports() {
+
+      /*
+       DEMO DATA ONLY
+       No real student information.
+      */
+
+      const demoReports = [
+        {
+          id: "SR-2026-1001",
+          type: "Bullying",
+          urgency: "Urgent",
+          status: "Under Review"
+        },
+        {
+          id: "SR-2026-1002",
+          type: "Cyberbullying",
+          urgency: "Needs Attention",
+          status: "Received"
+        },
+        {
+          id: "SR-2026-1003",
+          type: "Privacy Violation",
+          urgency: "Normal",
+          status: "Resolved"
+        }
+      ];
+
+
+      document.getElementById("totalReports")
+        .textContent = demoReports.length;
+
+      document.getElementById("pendingReports")
+        .textContent =
+        demoReports.filter(
+          report => report.status === "Under Review"
+        ).length;
+
+      document.getElementById("urgentReports")
+        .textContent =
+        demoReports.filter(
+          report => report.urgency === "Urgent"
+        ).length;
+
+      document.getElementById("resolvedReports")
+        .textContent =
+        demoReports.filter(
+          report => report.status === "Resolved"
+        ).length;
+
+
+      const reportList =
+        document.getElementById("reportList");
+
+      reportList.innerHTML = "";
+
+
+      demoReports.forEach(report => {
+
+        const box =
+          document.createElement("div");
+
+        box.className = "info-box";
+
+        box.style.marginBottom = "15px";
+
+        box.innerHTML = `
+
+          <h3>
+            📄 ${report.id}
+          </h3>
+
+          <p>
+            <b>Concern:</b>
+            ${report.type}
+          </p>
+
+          <p>
+            <b>Priority:</b>
+            ${report.urgency}
+          </p>
+
+          <p>
+            <b>Status:</b>
+            ${report.status}
+          </p>
+
+          <button
+            onclick="alert('Report details will be connected to the secure database in the next step.')"
+          >
+            👁️ View Report
+          </button>
+
+        `;
+
+        reportList.appendChild(box);
+
+      });
+
+    }
+
+  </script>
+
+</body>
+</html>
