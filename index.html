@@ -3,9 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>New Israel Highschool | Student SafeReport</title>
 
   <link rel="stylesheet" href="style.css">
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    const SUPABASE_URL = "https://eltgevmmmagmuaxkmjgr.supabase.co";
+
+    const SUPABASE_KEY =
+      "sb_publishable_NaQUO01IXfipLzyXXjh_YQ_j2vqcpu8";
+
+    const supabaseClient = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+  </script>
 </head>
 
 <body>
@@ -27,9 +43,9 @@
   </header>
 
 
-  <!-- HERO -->
   <main>
 
+    <!-- HOME -->
     <section class="hero">
 
       <div class="shield">🛡️</div>
@@ -37,9 +53,8 @@
       <h2>Your Voice Matters.</h2>
 
       <p>
-        Your safety matters. Report bullying, harassment,
-        privacy concerns, and other student issues safely
-        and responsibly.
+        Your safety matters. Report bullying, harassment, privacy concerns,
+        and other student issues safely and responsibly.
       </p>
 
       <button onclick="showReport()">
@@ -58,17 +73,20 @@
         <p>Submit a student concern or safety issue.</p>
       </div>
 
+
       <div class="action-card" onclick="showTrack()">
         <span>🔎</span>
         <h3>Track My Report</h3>
         <p>Check the status of your submitted report.</p>
       </div>
 
+
       <div class="action-card" onclick="showHelp()">
         <span>🆘</span>
         <h3>Need Immediate Help?</h3>
         <p>Find out what to do if you are in danger.</p>
       </div>
+
 
       <div class="action-card" onclick="showPrivacy()">
         <span>🔒</span>
@@ -79,7 +97,7 @@
     </section>
 
 
-    <!-- REPORT SECTION -->
+    <!-- REPORT -->
     <section id="reportSection" class="content-section hidden">
 
       <div class="content-card">
@@ -140,6 +158,7 @@
         </div>
 
 
+        <!-- FORM -->
         <div id="reportForm" class="report-form hidden">
 
           <h3>Report Details</h3>
@@ -148,6 +167,7 @@
             Selected concern:
             <strong id="selectedCategory"></strong>
           </p>
+
 
           <label>
             What happened?
@@ -164,7 +184,11 @@
           </label>
 
           <select id="location">
-            <option value="">Select location</option>
+
+            <option value="">
+              Select location
+            </option>
+
             <option>Classroom</option>
             <option>School Grounds</option>
             <option>Hallway</option>
@@ -173,6 +197,7 @@
             <option>Online</option>
             <option>Outside School</option>
             <option>Other</option>
+
           </select>
 
 
@@ -191,10 +216,15 @@
           </label>
 
           <select id="repeated">
-            <option value="">Select an answer</option>
+
+            <option value="">
+              Select an answer
+            </option>
+
             <option>Yes</option>
             <option>No</option>
             <option>Not sure</option>
+
           </select>
 
 
@@ -203,10 +233,15 @@
           </label>
 
           <select id="urgency">
-            <option value="">Select urgency</option>
+
+            <option value="">
+              Select urgency
+            </option>
+
             <option>Normal</option>
             <option>Needs Attention</option>
             <option>Urgent</option>
+
           </select>
 
 
@@ -215,8 +250,15 @@
           </label>
 
           <select id="anonymous">
-            <option>Yes - Anonymous</option>
-            <option>No - I can provide my name</option>
+
+            <option>
+              Yes - Anonymous
+            </option>
+
+            <option>
+              No - I can provide my name
+            </option>
+
           </select>
 
 
@@ -231,6 +273,7 @@
               id="studentName"
               placeholder="Your name"
             >
+
 
             <label>
               Grade & Section
@@ -272,12 +315,15 @@
     </section>
 
 
-    <!-- TRACK SECTION -->
+    <!-- TRACK REPORT -->
     <section id="trackSection" class="content-section hidden">
 
       <div class="content-card">
 
-        <button class="back-btn" onclick="goHome()">
+        <button
+          class="back-btn"
+          onclick="goHome()"
+        >
           ← Back
         </button>
 
@@ -287,15 +333,18 @@
           Enter your Report ID to check its status.
         </p>
 
+
         <input
           type="text"
           id="reportID"
           placeholder="Example: SR-2026-0001"
         >
 
+
         <button onclick="trackReport()">
           🔎 Check Status
         </button>
+
 
         <div id="trackingResult"></div>
 
@@ -304,38 +353,63 @@
     </section>
 
 
-    <!-- HELP SECTION -->
+    <!-- HELP -->
     <section id="helpSection" class="content-section hidden">
 
       <div class="content-card">
 
-        <button class="back-btn" onclick="goHome()">
+        <button
+          class="back-btn"
+          onclick="goHome()"
+        >
           ← Back
         </button>
 
         <h2>🆘 Need Immediate Help?</h2>
 
+
         <div class="emergency-box">
 
-          <h3>🚨 If you are in immediate danger</h3>
+          <h3>
+            🚨 If you are in immediate danger
+          </h3>
 
           <p>
             Do not wait for an online report to be reviewed.
             Move to a safe place and contact a trusted adult,
-            teacher, school authority, parent/guardian, or
-            appropriate emergency service.
+            teacher, school authority, parent/guardian,
+            or appropriate emergency service.
           </p>
 
         </div>
 
-        <h3>People you can approach:</h3>
+
+        <h3>
+          People you can approach:
+        </h3>
 
         <ul>
-          <li>👩‍🏫 Trusted Teacher</li>
-          <li>🧑‍🏫 School Counselor / Guidance Personnel</li>
-          <li>🏫 School Administrator</li>
-          <li>👨‍👩‍👧 Parent or Guardian</li>
-          <li>🤝 Trusted Adult</li>
+
+          <li>
+            👩‍🏫 Trusted Teacher
+          </li>
+
+          <li>
+            🧑‍🏫 School Counselor / Guidance Personnel
+          </li>
+
+          <li>
+            🏫 School Administrator
+          </li>
+
+          <li>
+            👨‍👩‍👧 Parent or Guardian
+          </li>
+
+          <li>
+            🤝 Trusted Adult
+          </li>
+
         </ul>
 
       </div>
@@ -343,27 +417,49 @@
     </section>
 
 
-    <!-- PRIVACY SECTION -->
+    <!-- PRIVACY -->
     <section id="privacySection" class="content-section hidden">
 
       <div class="content-card">
 
-        <button class="back-btn" onclick="goHome()">
+        <button
+          class="back-btn"
+          onclick="goHome()"
+        >
           ← Back
         </button>
 
         <h2>🔒 Privacy & Safety</h2>
 
+
         <div class="info-box">
 
-          <h3>Protect your information</h3>
+          <h3>
+            Protect your information
+          </h3>
 
           <ul>
-            <li>Never share your password.</li>
-            <li>Do not post private reports publicly.</li>
-            <li>Only provide information needed for the report.</li>
-            <li>Do not forward private photos or messages unnecessarily.</li>
-            <li>Use a trusted adult or school authority when you need help.</li>
+
+            <li>
+              Never share your password.
+            </li>
+
+            <li>
+              Do not post private reports publicly.
+            </li>
+
+            <li>
+              Only provide information needed for the report.
+            </li>
+
+            <li>
+              Do not forward private photos or messages unnecessarily.
+            </li>
+
+            <li>
+              Use a trusted adult or school authority when you need help.
+            </li>
+
           </ul>
 
         </div>
@@ -382,11 +478,14 @@
           ✅
         </div>
 
-        <h2>Report Received</h2>
+        <h2>
+          Report Received
+        </h2>
 
         <p>
           Your concern has been recorded.
         </p>
+
 
         <div class="report-number">
 
@@ -398,10 +497,12 @@
 
         </div>
 
+
         <p>
           Keep this Report ID if you want to track
           your report later.
         </p>
+
 
         <button onclick="goHome()">
           🏠 Back to Home
@@ -432,6 +533,7 @@
   </footer>
 
 
+  <!-- MAIN JAVASCRIPT -->
   <script src="script.js"></script>
 
 </body>
