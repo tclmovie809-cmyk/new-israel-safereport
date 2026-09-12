@@ -1,1 +1,416 @@
+* {
+  box-sizing: border-box;
+}
 
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(135deg, #061b35, #0b4f71, #087f5b);
+  color: #ffffff;
+}
+
+/* HEADER */
+
+.header {
+  width: 100%;
+  padding: 18px 7%;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: rgba(0, 20, 40, 0.85);
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 5px 25px rgba(0,0,0,0.25);
+}
+
+.school-logo {
+  width: 75px;
+  height: 75px;
+  object-fit: contain;
+  border-radius: 50%;
+  background: white;
+  padding: 4px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 25px;
+}
+
+.header p {
+  margin: 5px 0 0;
+  color: #b9f6df;
+}
+
+/* HERO */
+
+.hero {
+  max-width: 850px;
+  margin: 50px auto 30px;
+  padding: 55px 25px;
+  text-align: center;
+}
+
+.shield {
+  font-size: 85px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.hero h2 {
+  font-size: clamp(35px, 7vw, 60px);
+  margin: 15px 0;
+}
+
+.hero p {
+  max-width: 680px;
+  margin: auto;
+  font-size: 18px;
+  line-height: 1.7;
+  color: #d9f9f0;
+}
+
+/* BUTTON */
+
+button {
+  border: none;
+  border-radius: 14px;
+  padding: 14px 22px;
+  margin: 8px;
+  background: linear-gradient(135deg, #00b894, #087f5b);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  transition: 0.25s;
+}
+
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.35);
+}
+
+.hero button {
+  margin-top: 30px;
+  padding: 17px 30px;
+  font-size: 18px;
+}
+
+/* QUICK ACTIONS */
+
+.quick-actions {
+  max-width: 1050px;
+  margin: 20px auto 60px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.action-card {
+  padding: 25px 18px;
+  text-align: center;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.18);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.action-card:hover {
+  transform: translateY(-7px);
+  background: rgba(255,255,255,0.17);
+}
+
+.action-card span {
+  font-size: 45px;
+}
+
+.action-card h3 {
+  margin-bottom: 8px;
+}
+
+.action-card p {
+  color: #d5eee8;
+  line-height: 1.5;
+}
+
+/* CONTENT */
+
+.content-section {
+  min-height: 80vh;
+  padding: 35px 15px 70px;
+  animation: fadeIn 0.4s ease;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.content-card {
+  width: min(95%, 850px);
+  margin: auto;
+  padding: 35px;
+  border-radius: 25px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 15px 45px rgba(0,0,0,0.25);
+}
+
+.content-card h2 {
+  font-size: 32px;
+}
+
+.intro {
+  color: #d5eee8;
+}
+
+/* BACK */
+
+.back-btn {
+  background: rgba(255,255,255,0.12);
+}
+
+/* CATEGORY */
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 25px;
+}
+
+.category-grid button {
+  min-height: 100px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.18);
+}
+
+.category-grid button:hover {
+  background: rgba(0,184,148,0.35);
+}
+
+/* FORM */
+
+.report-form {
+  margin-top: 30px;
+  padding-top: 25px;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  animation: fadeIn 0.4s ease;
+}
+
+label {
+  display: block;
+  margin: 20px 0 8px;
+  font-weight: bold;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #17202a;
+  font-size: 16px;
+  outline: none;
+}
+
+textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+select {
+  cursor: pointer;
+}
+
+.submit-btn {
+  margin-top: 25px;
+  width: 100%;
+  padding: 17px;
+}
+
+/* PRIVACY */
+
+.privacy-warning {
+  margin-top: 25px;
+  padding: 18px;
+  border-left: 5px solid #00d4a4;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.18);
+  line-height: 1.6;
+}
+
+/* HELP */
+
+.emergency-box {
+  padding: 22px;
+  border-radius: 18px;
+  background: rgba(190, 30, 45, 0.25);
+  border: 1px solid rgba(255,100,100,0.35);
+  line-height: 1.7;
+}
+
+.content-card li {
+  margin: 14px 0;
+  line-height: 1.5;
+}
+
+/* INFO */
+
+.info-box {
+  padding: 22px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.08);
+  line-height: 1.7;
+}
+
+/* SUCCESS */
+
+.success-card {
+  text-align: center;
+}
+
+.success-icon {
+  font-size: 80px;
+  animation: pop 0.6s ease;
+}
+
+.report-number {
+  margin: 25px 0;
+  padding: 20px;
+  border-radius: 15px;
+  background: rgba(0,0,0,0.2);
+  font-size: 18px;
+}
+
+.report-number strong {
+  display: block;
+  margin-top: 10px;
+  font-size: 27px;
+  color: #8fffe0;
+}
+
+/* FOOTER */
+
+footer {
+  padding: 35px 20px;
+  text-align: center;
+  background: rgba(0,10,25,0.75);
+  color: #d5eee8;
+}
+
+footer p {
+  margin: 7px;
+}
+
+/* ANIMATIONS */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 750px) {
+
+  .header {
+    padding: 15px 20px;
+  }
+
+  .school-logo {
+    width: 60px;
+    height: 60px;
+  }
+
+  .header h1 {
+    font-size: 19px;
+  }
+
+  .header p {
+    font-size: 14px;
+  }
+
+  .hero {
+    margin-top: 25px;
+    padding: 35px 20px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  .quick-actions {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 15px;
+  }
+
+  .content-card {
+    padding: 25px 18px;
+  }
+
+  .content-card h2 {
+    font-size: 26px;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .quick-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .shield {
+    font-size: 70px;
+  }
+
+  button {
+    width: 100%;
+    margin: 6px 0;
+  }
+
+}
